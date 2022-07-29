@@ -9,17 +9,20 @@ class ConsultasController extends Controller
 {
     public function index()
     {
-        return ConsultasResource::collection(Consulta::all());
+        $result = ConsultasResource::collection(Consulta::all());
+        return response()->json($result,200);
     }
 
     public function store(ConsultaRequest $request)
     {   
-        return response()->json(Consulta::create($request->all()),201);
+        $result = new ConsultasResource(Consulta::create($request->all()));
+        return response()->json($result,201);
     }
 
     public function show(int $id)
     {
-        return Consulta::whereId($id)->get();
+        $result = new ConsultasResource(Consulta::whereId($id)->get()->first());
+        return response()->json($result,200);
     }
 
     public function update(Consulta $consulta ,ConsultaRequest $request)
@@ -27,7 +30,6 @@ class ConsultasController extends Controller
         $consulta->fill($request->all());
         $consulta->save();
         return $consulta;
-
     }
 
     public function destroy(int $id)

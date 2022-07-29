@@ -4,23 +4,27 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\PacienteRequest;
+use App\Http\Resources\PacientesResource;
 use App\Models\Paciente;
 
 class PacientesController extends Controller
 {
     public function index()
     {
-        return response()->json(Paciente::all(),200);
+        $result = PacientesResource::collection(Paciente::all());
+        return response()->json($result,200);
     }
 
     public function store(PacienteRequest $request)
     {   
-        return response()->json(Paciente::create($request->all()),201);
+        $result = new PacientesResource(Paciente::create($request->all()));
+        return response()->json($result,201);
     }
 
     public function show(int $id)
     {
-        return Paciente::whereId($id)->get();
+        $result = new PacientesResource((Paciente::whereId($id)->get()->first()));
+        return response()->json($result,200);
     }
     public function update(Paciente $paciente ,PacienteRequest $request)
     {  

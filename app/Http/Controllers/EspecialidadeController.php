@@ -10,17 +10,20 @@ class EspecialidadeController extends Controller
 {
     public function index()
     {
-        return EspecialidadesResource::collection(Especialidade::all());
+        $result = EspecialidadesResource::collection(Especialidade::all());
+        return response()->json($result,200);
     }
 
     public function store(EspecialidadeRequest $request)
     {   
-        return response()->json(Especialidade::create($request->all()),201);
+        $result = new EspecialidadesResource(Especialidade::create($request->all()));
+        return response()->json($result,201);
     }
 
     public function show(int $id)
     {
-        return Especialidade::whereId($id)->get();
+        $result = new EspecialidadesResource(Especialidade::whereId($id)->get()->first());
+        return response()->json($result,200);
     }
 
     public function update(Especialidade $especialidade ,EspecialidadeRequest $request)
@@ -28,7 +31,6 @@ class EspecialidadeController extends Controller
         $especialidade->fill($request->all());
         $especialidade->save();
         return $especialidade;
-
     }
 
     public function destroy(int $id)

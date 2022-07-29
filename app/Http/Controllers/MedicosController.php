@@ -10,17 +10,20 @@ class MedicosController extends Controller
 {
     public function index()
     {
-        return MedicosResource::collection(Medico::all());
+        $result = MedicosResource::collection(Medico::all());
+        return response()->json($result,200);
     }
 
     public function store(MedicoRequest $request)
     {   
-        return response()->json(Medico::create($request->all()),201);
+        $result = new MedicosResource(Medico::create($request->all()));
+        return response()->json($result,201);
     }
 
     public function show(int $id)
     {
-        return Medico::whereId($id)->get();
+        $result = new MedicosResource(Medico::whereId($id)->get()->first());
+        return response()->json($result,200);
     }
 
     public function update(Medico $medico ,MedicoRequest $request)
@@ -28,7 +31,6 @@ class MedicosController extends Controller
         $medico->fill($request->all());
         $medico->save();
         return $medico;
-
     }
 
     public function destroy(int $id)

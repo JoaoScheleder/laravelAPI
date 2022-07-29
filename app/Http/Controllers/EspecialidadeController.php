@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EspecialidadeRequest;
+use App\Http\Resources\EspecialidadesResource;
 use App\Models\Especialidade;
 
 class EspecialidadeController extends Controller
 {
     public function index()
     {
-        return response()->json(Especialidade::all(),200);
+        return EspecialidadesResource::collection(Especialidade::all());
     }
 
     public function store(EspecialidadeRequest $request)

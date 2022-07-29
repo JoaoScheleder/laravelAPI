@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 function createEspecialidades(){
     $canCreate = Especialidade::all()->count() == 0;
-    $especialidades = ['Pediatria','Cardiologia','Dermatologia','Nefrologia','Neurologia'];
+    $especialidades = [1=>'Pediatria',2=>'Cardiologia',3=>'Dermatologia',4=>'Nefrologia',5=>'Neurologia'];
     if($canCreate){
         foreach($especialidades as $especialidade){
             Especialidade::factory()->create([

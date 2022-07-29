@@ -7,8 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Consulta extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['medico_id','especialidade_id'];
 
-    use HasFactory;
+    public function medico()
+    {
+        return $this->hasOne(Medico::class,'id','medico_id');
+    }
+
+    public function paciente()
+    {
+        return $this->hasOne(Paciente::class,'id','paciente_id');
+    }
 
 }

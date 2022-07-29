@@ -16,8 +16,8 @@ class CreateConsultasTable extends Migration
     {
         Schema::create('consultas', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class,'paciente_id');
-            $table->foreignIdFor(User::class,'medico_id');
+            $table->foreignId('paciente_id')->references('id')->on('pacientes');
+            $table->foreignId('medico_id')->references('id')->on('medicos');
             $table->timestamp('data_hora_consulta');
             $table->timestamps();
         });

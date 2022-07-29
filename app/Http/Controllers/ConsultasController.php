@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 use App\Models\Consulta;
 use App\Http\Requests\ConsultaRequest;
+use App\Http\Resources\ConsultasResource;
 
 class ConsultasController extends Controller
 {
     public function index()
     {
-        return response()->json(Consulta::all(),200);
+        return ConsultasResource::collection(Consulta::all());
     }
 
     public function store(ConsultaRequest $request)

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MedicoRequest;
+use App\Http\Resources\MedicosResource;
 use App\Models\Medico;
 
 class MedicosController extends Controller
 {
     public function index()
     {
-        return response()->json(Medico::all(),200);
+        return MedicosResource::collection(Medico::all());
     }
 
     public function store(MedicoRequest $request)

@@ -15,7 +15,7 @@ class MedicoFactory extends Factory
     {
         return [
             'nome'=> $this->faker->name(),
-            'especialidade_id'=> random_int(0,4),
+            'especialidade_id'=> random_int(1,5),
             'crm'=> strval(random_int(0,999999))
 
         ];

@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Especialidade;
+use App\Models\Medico;
+use App\Models\Paciente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +17,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+function createEspecialidades(){
+    $canCreate = Especialidade::all()->count() == 0;
+    $especialidades = ['Pediatria','Cardiologia','Dermatologia','Nefrologia','Neurologia'];
+    if($canCreate){
+        foreach($especialidades as $especialidade){
+            Especialidade::factory()->create([
+                'especialidade' => $especialidade
+            ]);
+        }
+    }
+}
+
+function createMedicos(){
+    $canCreate = Medico::All()->count() ==0;
+    if($canCreate){
+        Medico::factory()->count(10)->create();
+    }
+}
+
+function createPacientes(){
+    $canCreate = Paciente::All()->count() ==0;
+    if($canCreate){
+        Paciente::factory()->count(50)->create();
+    }
+}
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/createFakeDatabase',function(){
+    createEspecialidades();
+    createMedicos();
+    createPacientes();
+});
 
 Route::get('/especialidades',function(){
+    $especialidade = Especialidade::all();
+    if($especialidade->count() == 0){
+        $created = Especialidade::factory()->count(10)->make();
+        return($created);
+    }
     return array("id"=>1);
 });
 

@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Especialidade extends Model
 {
     use HasFactory;
-  
+    
+    protected $fillable = ['especialidade'];
+
     protected static function newFactory(){
         return EspecialidadeFactory::new();
     }

@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\EspecialidadeController;
+use App\Http\Controllers\MedicosController;
+use App\Http\Controllers\PacientesController;
+use App\Http\Controllers\ConsultasController;
 use App\Models\Especialidade;
 use App\Models\Medico;
 use App\Models\Paciente;
@@ -53,12 +57,10 @@ Route::get('/createFakeDatabase',function(){
     createPacientes();
 });
 
-Route::get('/especialidades',function(){
-    $especialidade = Especialidade::all();
-    if($especialidade->count() == 0){
-        $created = Especialidade::factory()->count(10)->make();
-        return($created);
-    }
-    return array("id"=>1);
-});
 
+// ESPECIALIDADES 
+
+Route::apiResource('/especialidades',EspecialidadeController::class);
+Route::apiResource('/medicos',MedicosController::class);
+Route::apiResource('/pacientes',PacientesController::class);
+Route::apiResource('/consultas',ConsultasController::class);

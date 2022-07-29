@@ -26,7 +26,7 @@ class PacienteFactory extends Factory
             'telefone'=> json_encode(["telefone"=> $this->generateTelephone()]),
             'email' => $this->faker->unique()->word . '@gmail.com',
             'cep' => strval($this->faker->numberBetween($min = 10000000, $max = 99999999)),
-            'endereço' => 'Rua ' . $this->faker->word,
+            'endereco' => 'Rua ' . $this->faker->word,
             'numero' => strval($this->faker->numberBetween($min=1,$max=9999))
 
         ];

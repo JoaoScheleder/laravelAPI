@@ -20,13 +20,13 @@ class CreatePacientesTable extends Migration
             $table->json('telefone');
             $table->string('email',254);
             $table->string('cep',8);
-            $table->text('endereço');
+            $table->text('endereco');
             $table->integer('numero');
             $table->timestamps();
         });
     }
 
-    /**
+/**
      * Reverse the migrations.
      *
      * @return void
